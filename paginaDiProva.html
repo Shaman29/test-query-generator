@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="BitAce">
+
+  <!--<link rel="stylesheet" href="css/styles.css?v=1.0">-->
+</head>
+
+<body>
+	<div id="mainDiv">
+    <table id="mainTable">
+      <tr>
+        <th>
+          <input type="text" name="input1" id="input1" value="">
+        </th>
+      </tr>
+    </table>
+	</div>
+  <button type="button" name="button" onclick="togliInput()">-</button>
+  <button type="button" name="button" onclick="aggiungiInput()">+</button>
+  <button type="button" name="button" onclick="stampa()">stampa</button>
+  <br>
+  <textarea id="codeArea" rows="20" cols="100">
+  </textarea>
+  <script>
+	var currentNode;
+  var numeroinput = 0;
+  var mainTable = document.getElementById("mainTable");
+  var valoriInput = [];
+
+  function aggiungiInput(){
+
+    var nuovoInput = document.createElement("input");
+    var idAttr = document.createAttribute("id");
+    idAttr.value = "input" + numeroinput++;
+    var typeAttr = document.createAttribute("type");
+    typeAttr.value = "text";
+    nuovoInput.setAttributeNode(idAttr);
+
+    var trElem = document.createElement("tr");
+    var thElem = document.createElement("th");
+
+    valoriInput.push(nuovoInput);
+
+    thElem.appendChild(nuovoInput);
+    trElem.appendChild(thElem);
+    mainTable.appendChild(trElem);
+  }
+
+  function togliInput(){
+    mainTable.removeChild(mainTable.lastChild);
+    valoriInput.pop();
+  }
+
+  function stampa(){
+    var stringa = "";
+    valoriInput.forEach(element => {
+      stringa += element.value;
+      stringa += "-";
+    });
+    document.getElementById("mainp").innerHTML = stringa;
+  }
+  </script>
+</body>
+</html>
